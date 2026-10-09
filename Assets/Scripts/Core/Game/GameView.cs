@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public sealed class GameView : MonoBehaviour
+namespace Sailing.Core
 {
-    public void Initialize(Game game)
+    public sealed class GameView : MonoBehaviour
     {
+        public void Initialize(Game game)
+        {
+        }
     }
 }

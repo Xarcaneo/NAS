@@ -1,32 +1,38 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public sealed class GameModel : MonoBehaviour
+namespace Sailing.Core
 {
-    [SerializeField] private GameView gameView;
-
-    public Game Game { get; private set; }
-
-    private void Awake()
+    public sealed class GameModel : MonoBehaviour
     {
-        StartGame();
-    }
+        [SerializeField] private GameView _gameView;
+        [SerializeField] private InputActionAsset _inputActions;
 
-    private void Update()
-    {
-        Game?.Update();
-    }
+        public Game Game { get; private set; }
 
-    private void OnDestroy()
-    {
-        Game?.Dispose();
-    }
+        private void Awake()
+        {
+            StartGame();
+        }
 
-    private void StartGame()
-    {
-        Game = new Game();
-        Game.Initialize();
+        private void Update()
+        {
+            Game?.Update();
+        }
 
-        if (gameView != null)
-            gameView.Initialize(Game);
+        private void OnDestroy()
+        {
+            Game?.Dispose();
+            Game = null;
+        }
+
+        private void StartGame()
+        {
+            Game = new Game();
+            Game.Initialize(_inputActions);
+
+            if (_gameView != null)
+                _gameView.Initialize(Game);
+        }
     }
 }

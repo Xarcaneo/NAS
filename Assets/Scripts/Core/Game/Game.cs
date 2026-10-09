@@ -1,28 +1,38 @@
 using System;
-using UnityEngine;
+using UnityEngine.InputSystem;
 
-public sealed class Game
+namespace Sailing.Core
 {
-    private static Game _instance;
-    public static Game Instance => _instance;
-
-    public Game()
+    public sealed class Game : IDisposable
     {
+        private static Game s_instance;
 
-    }
+        public static Game Instance => s_instance;
 
-    public void Initialize()
-    {
+        public InputManager Input { get; private set; }
 
-    }
+        public Game()
+        {
+            s_instance = this;
+        }
 
-    public void Update()
-    {
-    }
+        public void Initialize(InputActionAsset actions)
+        {
+            Input = new InputManager();
+            Input.Initialize(actions);
+        }
 
-    public void Dispose()
-    {
-        if (_instance == this)
-            _instance = null;
+        public void Update()
+        {
+        }
+
+        public void Dispose()
+        {
+            Input?.Dispose();
+            Input = null;
+
+            if (s_instance == this)
+                s_instance = null;
+        }
     }
 }
