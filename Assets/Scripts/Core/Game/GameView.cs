@@ -2,10 +2,13 @@ using UnityEngine;
 
 namespace Sailing.Core
 {
-    public sealed class GameView : MonoBehaviour
+    public class GameView : MonoBehaviour
     {
+        [SerializeField] private MapView _mapView;
+
         public void Initialize(Game game)
         {
+            _mapView.Initialize(game.Map);
         }
     }
 }

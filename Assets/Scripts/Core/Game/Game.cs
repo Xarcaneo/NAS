@@ -3,13 +3,15 @@ using UnityEngine.InputSystem;
 
 namespace Sailing.Core
 {
-    public sealed class Game : IDisposable
+    public class Game : IDisposable
     {
         private static Game s_instance;
 
         public static Game Instance => s_instance;
 
         public InputManager Input { get; private set; }
+
+        public Map Map { get; private set; }
 
         public Game()
         {
@@ -20,19 +22,20 @@ namespace Sailing.Core
         {
             Input = new InputManager();
             Input.Initialize(actions);
+
+            Map = new Map();
         }
 
-        public void Update()
+        public void Update(float deltaTime)
         {
+            Map.Ship.Rudder = Input.MovementInput.x;
+            Map.Update(deltaTime);
         }
 
         public void Dispose()
         {
-            Input?.Dispose();
-            Input = null;
-
-            if (s_instance == this)
-                s_instance = null;
+            Input.Dispose();
+            s_instance = null;
         }
     }
 }

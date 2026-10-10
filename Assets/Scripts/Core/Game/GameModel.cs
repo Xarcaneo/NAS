@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Sailing.Core
 {
-    public sealed class GameModel : MonoBehaviour
+    public class GameModel : MonoBehaviour
     {
         [SerializeField] private GameView _gameView;
         [SerializeField] private InputActionAsset _inputActions;
@@ -17,13 +17,12 @@ namespace Sailing.Core
 
         private void Update()
         {
-            Game?.Update();
+            Game.Update(Time.deltaTime);
         }
 
         private void OnDestroy()
         {
-            Game?.Dispose();
-            Game = null;
+            Game.Dispose();
         }
 
         private void StartGame()
@@ -31,8 +30,7 @@ namespace Sailing.Core
             Game = new Game();
             Game.Initialize(_inputActions);
 
-            if (_gameView != null)
-                _gameView.Initialize(Game);
+            _gameView.Initialize(Game);
         }
     }
 }

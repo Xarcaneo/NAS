@@ -3,30 +3,24 @@ using UnityEngine.InputSystem;
 
 namespace Sailing.Core
 {
-    public sealed class ButtonBinding : IDisposable
+    public class ButtonBinding : IDisposable
     {
         private readonly InputAction _action;
 
         public event Action Pressed;
         public event Action Released;
 
-        public bool IsHeld => _action != null && _action.IsPressed();
+        public bool IsHeld => _action.IsPressed();
 
         public ButtonBinding(InputAction action)
         {
             _action = action;
-            if (_action == null)
-                return;
-
             _action.performed += OnPerformed;
             _action.canceled += OnCanceled;
         }
 
         public void Dispose()
         {
-            if (_action == null)
-                return;
-
             _action.performed -= OnPerformed;
             _action.canceled -= OnCanceled;
         }
