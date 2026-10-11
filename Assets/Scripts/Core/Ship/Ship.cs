@@ -11,7 +11,8 @@ namespace Sailing.Core
         private ShipSettings _settings;
         private float _sailOpenness = MaxSailOpenness;
         private float _sailAngle;
-        private float _rudder;
+        private float _sailOpennessInput;
+        private float _sailAngleInput;
 
         public Vector2 Position { get; private set; }
 
@@ -44,10 +45,16 @@ namespace Sailing.Core
             set => _sailAngle = Mathf.Clamp(value, -MaxSailAngle, MaxSailAngle);
         }
 
-        public float Rudder
+        public float SailOpennessInput
         {
-            get => _rudder;
-            set => _rudder = Mathf.Clamp(value, -1f, 1f);
+            get => _sailOpennessInput;
+            set => _sailOpennessInput = Mathf.Clamp(value, -1f, 1f);
+        }
+
+        public float SailAngleInput
+        {
+            get => _sailAngleInput;
+            set => _sailAngleInput = Mathf.Clamp(value, -1f, 1f);
         }
 
         public static Vector2 HeadingToDirection(float heading)
@@ -70,21 +77,25 @@ namespace Sailing.Core
 
         public void Update(float deltaTime, Wind wind)
         {
+            SailOpenness += _sailOpennessInput * _settings.SailOpennessRate * deltaTime;
+            SailAngle += _sailAngleInput * _settings.SailAngleRate * deltaTime;
+
             Vector2 forward = Forward;
             Vector2 right = Right;
 
-            Vector2 acceleration = ComputeSailForce(wind) + ComputeHullDrag(forward, right);
-            Velocity += acceleration * deltaTime;
-            Position += Velocity * deltaTime;
-
-            Heading = Mathf.Repeat(Heading + ComputeTurnRate() * deltaTime, 360f);
-        }
-
-        private Vector2 ComputeSailForce(Wind wind)
-        {
             Vector2 sailNormal = HeadingToDirection(Heading + _sailAngle);
             Vector2 apparentWind = wind.Velocity - Velocity;
+            Vector2 sailForce = ComputeSailForce(sailNormal, apparentWind);
+            Vector2 hullDrag = ComputeHullDrag(forward, right);
+            float turnRate = ComputeTurnRate(sailForce, right);
 
+            Velocity += (sailForce + hullDrag) * deltaTime;
+            Position += Velocity * deltaTime;
+            Heading = Mathf.Repeat(Heading + turnRate * deltaTime, 360f);
+        }
+
+        private Vector2 ComputeSailForce(Vector2 sailNormal, Vector2 apparentWind)
+        {
             float normalWind = Vector2.Dot(apparentWind, sailNormal);
             float pressure = normalWind * Mathf.Abs(normalWind) * _settings.SailForceCoefficient;
             float openness = _sailOpenness / MaxSailOpenness;
@@ -111,11 +122,12 @@ namespace Sailing.Core
             return forwardDrag + lateralDrag;
         }
 
-        private float ComputeTurnRate()
+        private float ComputeTurnRate(Vector2 sailForce, Vector2 right)
         {
-            float effectiveness = Mathf.Clamp01(Mathf.Abs(ForwardSpeed) / _settings.RudderReferenceSpeed);
+            // The sideways part of the sail force swings the bow towards the side the sail pushes to.
+            float sailTurn = Vector2.Dot(sailForce, right) * _settings.SailTurnCoefficient;
 
-            return _rudder * _settings.MaxTurnRate * effectiveness;
+            return Mathf.Clamp(sailTurn, -_settings.MaxTurnRate, _settings.MaxTurnRate);
         }
     }
 }

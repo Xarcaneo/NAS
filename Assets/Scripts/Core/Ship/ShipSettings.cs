@@ -12,7 +12,9 @@ namespace Sailing.Core
         [SerializeField] private float _asternDragMultiplier = 4f;
         [SerializeField] private float _lateralDragCoefficient = 1.0f;
         [SerializeField] private float _maxTurnRate = 25f;
-        [SerializeField] private float _rudderReferenceSpeed = 3f;
+        [SerializeField] private float _sailOpennessRate = 50f;
+        [SerializeField] private float _sailAngleRate = 45f;
+        [SerializeField] private float _sailTurnCoefficient = 8f;
 
         public float SailForceCoefficient => _sailForceCoefficient;
 
@@ -26,6 +28,10 @@ namespace Sailing.Core
 
         public float MaxTurnRate => _maxTurnRate;
 
-        public float RudderReferenceSpeed => _rudderReferenceSpeed;
+        public float SailOpennessRate => _sailOpennessRate;
+
+        public float SailAngleRate => _sailAngleRate;
+
+        public float SailTurnCoefficient => _sailTurnCoefficient;
     }
 }

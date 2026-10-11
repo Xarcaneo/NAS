@@ -7,130 +7,90 @@
             "id": "af7a2186-fa79-eecf-486c-243f648ea054",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "SailOpenness",
                     "type": "Value",
-                    "id": "0ef7c713-d76d-e8fb-4a69-de713a488d15",
-                    "expectedControlType": "Vector2",
+                    "id": "5d91dd73-4772-49f7-a843-d1b8f957a57a",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Q",
-                    "type": "Button",
-                    "id": "d7364500-80ff-00cc-51b2-6b79c53340c0",
-                    "expectedControlType": "Button",
+                    "name": "SailRotation",
+                    "type": "Value",
+                    "id": "d8b7e66c-5c1d-4f58-af1a-ad2cc0aafee1",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "W",
-                    "type": "Button",
-                    "id": "ab2b33ff-2ba5-3f8a-28a4-0fd7fb33507f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "E",
-                    "type": "Button",
-                    "id": "703d663f-0c5e-4487-1a9a-8a5a39cd5102",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
-                    "name": "Arrows",
-                    "id": "e2e97d0b-e5b8-88b8-f971-30a2184cb039",
-                    "path": "2DVector",
+                    "name": "Keys",
+                    "id": "a560d1b4-3007-468f-89ba-0d8d2f3a1395",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "SailOpenness",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "e77e9a35-bce5-3047-45e5-d869229c16c3",
-                    "path": "<Keyboard>/upArrow",
+                    "name": "negative",
+                    "id": "368ec70c-bb20-4861-a4b5-a40a2d439745",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "SailOpenness",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
-                    "id": "4f4d0eac-e2a3-222c-0c75-e292fa9b8f36",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "3f6350ae-601b-2751-28db-ac9868ac829d",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "104d1d88-4e01-c6f1-f0ab-e2867c72c228",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "5003c42c-02d3-2899-e707-6776848b2647",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Q",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "23674f17-4202-5dc8-7f29-4f02a39941aa",
+                    "name": "positive",
+                    "id": "a3130847-39a7-46b0-af5e-9e1d8c718110",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "W",
+                    "action": "SailOpenness",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Keys",
+                    "id": "8149440f-ff47-44ea-a39e-813de0d48f90",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SailRotation",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "03a74df7-019d-3b2e-3e06-345eb5cb0841",
+                    "name": "negative",
+                    "id": "b190fd03-78d2-40ab-a215-c530132de100",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SailRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "2e852849-a96b-43fd-b14a-29526850cb29",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "E",
+                    "action": "SailRotation",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }

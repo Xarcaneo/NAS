@@ -28,7 +28,10 @@ namespace Sailing.Core
 
         public void Update(float deltaTime)
         {
-            Map.Ship.Rudder = Input.MovementInput.x;
+            Ship ship = Map.Ship;
+            ship.SailOpennessInput = Input.SailOpennessInput;
+            ship.SailAngleInput = Input.SailRotationInput;
+
             Map.Update(deltaTime);
         }
 

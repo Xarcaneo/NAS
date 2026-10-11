@@ -57,8 +57,10 @@ MonoBehaviour:
     _asternDragMultiplier: 4
     _lateralDragCoefficient: 1
     _maxTurnRate: 25
-    _rudderReferenceSpeed: 3
-  _meshYawOffset: 0
+    _sailOpennessRate: 50
+    _sailAngleRate: 45
+    _sailTurnCoefficient: 8
+  _meshYawOffset: 180
 --- !u!1 &1617915466183983387
 GameObject:
   m_ObjectHideFlags: 0
