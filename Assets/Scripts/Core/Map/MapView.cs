@@ -6,12 +6,9 @@ namespace Sailing.Core
     {
         [SerializeField] private ShipView _shipView;
 
-        private Map _map;
-
         public void Initialize(Map map)
         {
-            _map = map;
-            _shipView.Initialize(_map.Ship);
+            _shipView.Initialize(map.Ship);
         }
     }
 }

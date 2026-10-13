@@ -31,8 +31,6 @@ namespace Sailing.Core
             }
         }
 
-        public float ForwardSpeed => Vector2.Dot(Velocity, Forward);
-
         public float SailOpenness
         {
             get => _sailOpenness;

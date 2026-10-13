@@ -10,7 +10,7 @@ namespace Sailing.Core
 
         public Ship Ship { get; }
 
-        public Wind Wind { get; set; }
+        public Wind Wind { get; }
 
         public void Update(float deltaTime)
         {

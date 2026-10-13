@@ -8,7 +8,7 @@ namespace Sailing.Core
         [SerializeField] private GameView _gameView;
         [SerializeField] private InputActionAsset _inputActions;
 
-        public Game Game { get; private set; }
+        private Game _game;
 
         private void Awake()
         {
@@ -17,20 +17,20 @@ namespace Sailing.Core
 
         private void Update()
         {
-            Game.Update(Time.deltaTime);
+            _game.Update(Time.deltaTime);
         }
 
         private void OnDestroy()
         {
-            Game.Dispose();
+            _game.Dispose();
         }
 
         private void StartGame()
         {
-            Game = new Game();
-            Game.Initialize(_inputActions);
+            _game = new Game();
+            _game.Initialize(_inputActions);
 
-            _gameView.Initialize(Game);
+            _gameView.Initialize(_game);
         }
     }
 }

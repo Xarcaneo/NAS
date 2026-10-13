@@ -5,18 +5,9 @@ namespace Sailing.Core
 {
     public class Game : IDisposable
     {
-        private static Game s_instance;
-
-        public static Game Instance => s_instance;
-
         public InputManager Input { get; private set; }
 
         public Map Map { get; private set; }
-
-        public Game()
-        {
-            s_instance = this;
-        }
 
         public void Initialize(InputActionAsset actions)
         {
@@ -38,7 +29,6 @@ namespace Sailing.Core
         public void Dispose()
         {
             Input.Dispose();
-            s_instance = null;
         }
     }
 }
