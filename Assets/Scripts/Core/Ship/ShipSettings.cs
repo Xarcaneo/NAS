@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Sailing.Core
 {
+    // Tuning values for the ship physics, set on the ship prefab.
     [Serializable]
     public class ShipSettings
     {

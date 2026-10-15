@@ -12,6 +12,8 @@ namespace Sailing.Core
         private Ship _ship;
         private Label _sailOpennessLabel;
         private Label _sailRotationLabel;
+
+        // Last values written to the labels, so the text is only rebuilt when the number changes.
         private int _shownSailOpenness = -1;
         private int _shownSailAngle = int.MinValue;
 

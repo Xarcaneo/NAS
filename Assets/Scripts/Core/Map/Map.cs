@@ -5,6 +5,7 @@ namespace Sailing.Core
         public Map()
         {
             Ship = new Ship();
+            // Constant wind blowing towards world +X.
             Wind = new Wind(90f, 20f);
         }
 

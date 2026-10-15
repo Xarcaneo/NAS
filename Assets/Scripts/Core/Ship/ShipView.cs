@@ -5,7 +5,10 @@ namespace Sailing.Core
     public class ShipView : MonoBehaviour
     {
         [SerializeField] private ShipSettings _settings = new();
+        // Angle between the mesh's forward axis and its bow. This model's bow faces -Z, so it uses 180.
         [SerializeField] private float _meshYawOffset;
+
+        // The model has several sails in one mesh, so they all turn together.
         [SerializeField] private Transform _sail;
 
         private Ship _ship;

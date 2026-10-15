@@ -5,7 +5,7 @@ namespace Sailing.Core
 {
     public class InputManager : IDisposable
     {
-        public const string MapName = "Game";
+        private const string MapName = "Game";
 
         private InputActionMap _map;
         private InputAction _sailOpennessAction;

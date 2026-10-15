@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Sailing.Core
 {
+    // Ship movement on the water plane. Vector2 values map to world XZ, so Position.y is world Z.
     public class Ship
     {
         public const float MinSailOpenness = 0f;
@@ -43,6 +44,7 @@ namespace Sailing.Core
             set => _sailAngle = Mathf.Clamp(value, -MaxSailAngle, MaxSailAngle);
         }
 
+        // Inputs are -1 to 1 and move the sail at the rates from ShipSettings.
         public float SailOpennessInput
         {
             get => _sailOpennessInput;
@@ -55,6 +57,7 @@ namespace Sailing.Core
             set => _sailAngleInput = Mathf.Clamp(value, -1f, 1f);
         }
 
+        // 0 degrees points to world +Z, 90 to world +X, so angles grow clockwise seen from above.
         public static Vector2 HeadingToDirection(float heading)
         {
             float radians = heading * Mathf.Deg2Rad;
@@ -81,6 +84,7 @@ namespace Sailing.Core
             Vector2 forward = Forward;
             Vector2 right = Right;
 
+            // The sail angle is relative to the bow. Apparent wind is what the sail feels on a moving ship.
             Vector2 sailNormal = HeadingToDirection(Heading + _sailAngle);
             Vector2 apparentWind = wind.Velocity - Velocity;
             Vector2 sailForce = ComputeSailForce(sailNormal, apparentWind);
@@ -94,6 +98,7 @@ namespace Sailing.Core
 
         private Vector2 ComputeSailForce(Vector2 sailNormal, Vector2 apparentWind)
         {
+            // Flat sail: only wind hitting it head-on pushes, and the push grows with the square of that speed.
             float normalWind = Vector2.Dot(apparentWind, sailNormal);
             float pressure = normalWind * Mathf.Abs(normalWind) * _settings.SailForceCoefficient;
             float openness = _sailOpenness / MaxSailOpenness;
@@ -107,6 +112,8 @@ namespace Sailing.Core
 
         private Vector2 ComputeHullDrag(Vector2 forward, Vector2 right)
         {
+            // Water drag grows with the square of speed. Sideways drag is much stronger because of the keel,
+            // which is what makes the ship follow its bow instead of sliding with the wind.
             float forwardSpeed = Vector2.Dot(Velocity, forward);
             float lateralSpeed = Vector2.Dot(Velocity, right);
 

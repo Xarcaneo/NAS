@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Sailing.Core
 {
+    // Entry point in the scene. Creates the game and hands it to the views.
     public class GameModel : MonoBehaviour
     {
         [SerializeField] private GameView _gameView;

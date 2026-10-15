@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Sailing.Core
 {
+    // Plain C# side of the game. GameModel owns it and ticks it every frame.
     public class Game : IDisposable
     {
         public InputManager Input { get; private set; }
